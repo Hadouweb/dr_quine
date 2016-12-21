@@ -1,48 +1,26 @@
-CC = gcc -Werror -Wextra -Wall -g
+CC = clang -Werror -Wextra -Wall
 
-SRCPATH = ./srcs
-OPTION_L = $(SRCPATH)/option_l
+SRC_COLLEEN = colleen.c\
 
-INCPATH = ./includes
+OBJ_COLLEEN = $(SRC_COLLEEN:.c=.o)
 
-LIBFTPATH = ./libft
+NAME_COLLEEN = Colleen
 
-HEADER = -I $(LIBFTPATH)/includes -I $(INCPATH)
+all: $(NAME_COLLEEN)
 
-LIB = -L$(LIBFTPATH) -lft -ltermcap
-LIBNAME = $(LIBFTPATH)/libft.a
-
-SRC = 	$(SRCPATH)/main.c\
-    	$(SRCPATH)/error.c\
-    	$(SRCPATH)/debug.c\
-    	$(SRCPATH)/key_func.c\
-    	$(SRCPATH)/util.c\
-    	$(SRCPATH)/init.c\
-
-OBJ = $(SRC:.c=.o)
-
-NAME = tc
-
-all: $(NAME)
-
-$(NAME): $(LIBNAME) $(OBJ)
-	@$(CC) -o $@ $(LIB) $^
+$(NAME_COLLEEN): $(OBJ_COLLEEN)
+	@$(CC) -o $@ $^
 	@echo "\n\033[39mCompilation done.\033[0m"
 
-$(LIBNAME):
-	@make -C $(LIBFTPATH) -j8
-
 %.o: %.c
-	@$(CC) -o $@ -c $< $(HEADER)
+	@$(CC) -o $@ -c $<
 	@echo "\033[34m█\033[0m\c"
 
 clean:
-	@make -C $(LIBFTPATH) clean
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ_COLLEEN)
 
 fclean: clean
-	@make -C $(LIBFTPATH) fclean
-	@rm -rf $(NAME)
+	@rm -rf $(NAME_COLLEEN)
 
 re: fclean all
 
