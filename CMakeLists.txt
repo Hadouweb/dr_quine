@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.0)
 project(dr_quine)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+#add_subdirectory(unit_test)
 
-set(SOURCE_FILES
-    auteur
-    Makefile)
+set(SRCS
+        Colleen.c
+        Grace.c
+    )
 
-add_executable(dr_quine ${SOURCE_FILES})
+add_executable(dr_quine ${SRCS})

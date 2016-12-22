@@ -1,12 +1,19 @@
 CC = clang -Werror -Wextra -Wall
 
-SRC_COLLEEN = colleen.c\
+SRC_COLLEEN = Colleen.c
+SRC_GRACE = Grace.c
 
 OBJ_COLLEEN = $(SRC_COLLEEN:.c=.o)
+OBJ_GRACE = $(SRC_GRACE:.c=.o)
 
 NAME_COLLEEN = Colleen
+NAME_GRACE = Grace
 
-all: $(NAME_COLLEEN)
+all: $(NAME_GRACE) $(NAME_COLLEEN)
+
+$(NAME_GRACE): $(OBJ_GRACE)
+	@$(CC) -o $@ $^
+	@echo "\n\033[39mCompilation done.\033[0m"
 
 $(NAME_COLLEEN): $(OBJ_COLLEEN)
 	@$(CC) -o $@ $^
@@ -18,8 +25,10 @@ $(NAME_COLLEEN): $(OBJ_COLLEEN)
 
 clean:
 	@rm -rf $(OBJ_COLLEEN)
+	@rm -rf $(OBJ_GRACE)
 
 fclean: clean
+	@rm -rf $(NAME_GRACE)
 	@rm -rf $(NAME_COLLEEN)
 
 re: fclean all
